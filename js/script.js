@@ -57,12 +57,13 @@ function showPage(list, page) {
 ***/
 
 const div = document.createElement('div');
+const page = document.querySelector('.page');
+const ul = document.createElement('ul');
 
 function appendPageLink(list) {
    // const div = document.createElement('div');
    div.className = "pagination";
-   const ul = document.createElement('ul');
-   const page = document.querySelector('.page');
+ 
    const pagesRequired = list.length / numberPerPage;
 
    for (let i = 0; i < pagesRequired; i += 1) {
@@ -102,6 +103,28 @@ div.addEventListener('click', (event) => {
 
 showPage(listItem, 1);
 appendPageLink(listItem);
+
+// exceeds
+
+// add search compenent
+const searchDiv = document.createElement('div');
+
+function searchBar() {
+   let searchInput = document.createElement('input');
+   let searchButton = document.createElement('button');
+   searchDiv.className = "student-search";
+   searchInput.placeholder = "Search for students...";
+   searchButton.textContent = "Search";
+   searchDiv.appendChild(searchInput);
+   searchDiv.appendChild(searchButton);
+   let ulParent = document.querySelector('.page-header');
+   ulParent.appendChild(searchDiv);
+}
+
+searchBar();
+
+// 
+
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
