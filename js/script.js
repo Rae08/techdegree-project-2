@@ -21,7 +21,6 @@ const listItem = document.querySelectorAll('.student-item');
 const numberPerPage = 10;
 
 
-
 /*** 
    Create the `showPage` function to hide all of the items in the 
    list except for the ten you want to show.
@@ -44,7 +43,7 @@ function showPage(list, page) {
    for (let i = 0; i < list.length; i += 1 ) {
       student = list[i]
       if (i >= startIndex && i < endIndex) {
-         // console.log(student + 'display')
+         student.style.display = "block";
       } else {
          student.style.display = "none";
          // console.log(student + "don't display")
@@ -52,17 +51,57 @@ function showPage(list, page) {
    }
 }
 
-showPage(listItem, 6);
-
-
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
 
+const div = document.createElement('div');
 
+function appendPageLink(list) {
+   // const div = document.createElement('div');
+   div.className = "pagination";
+   const ul = document.createElement('ul');
+   const page = document.querySelector('.page');
+   const pagesRequired = list.length / numberPerPage;
 
+   for (let i = 0; i < pagesRequired; i += 1) {
+      let li = document.createElement('li');
+      let a = document.createElement('a');
+      a.href = "#";
+      a.textContent = i + 1;
+      li.appendChild(a);
+      ul.appendChild(li);
+   }
 
+  div.appendChild(ul);
+  page.appendChild(div);
+
+  const activeLi = document.querySelector('.pagination li');
+  activeLi.className = 'active';
+  console.log(div);
+}
+
+const pageList = document.querySelectorAll('.pagination li');
+div.addEventListener('click', (event) => {
+   let clickedButton = event.target.textContent;
+   console.log(typeof(clickedButton));
+   
+   for (let i = 0; i < pageList.length; i += 1) {
+      if (clickedButton === pageList[i].textContent) {
+         pageList[i].className = "active";
+      } else {
+         pageList[i].className = " ";
+      }
+
+  }
+  
+  showPage(listItem, clickedButton);
+
+  })
+
+showPage(listItem, 1);
+appendPageLink(listItem);
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
